@@ -36,7 +36,7 @@ function screen1stack2() {
   return (
     <View style={styles.searchScreen}>
       <Text style={styles.text}>Screen home del segundo stack</Text>
-      <Button title="screen 1 del segundo stack" onPress={() => navigation.navigate('screen2stack2', { itemId: "infopibes" })} />
+      <Button title="screen 1 del segundo stack" onPress={() => navigation.navigate('screen2stack2', { itemId: 55 })} />
       <Text style={styles.text}>Toca el icono</Text>
       <TouchableOpacity onPress={() => alert('solta la compu')}>
         <Ionicons name="search" size={75} color="white" />
@@ -57,7 +57,7 @@ function screen2stack2({ route }) {
   );
 }
 
-const StackC = createNativeStackNavigator();
+const Stack31 = createNativeStackNavigator();
 // screen home del tecer stack
 function screen1stack3() {
   const navigation = useNavigation();
@@ -122,8 +122,8 @@ function stack2() {
 
 function stack3() {
   return (
-    <StackC.Navigator>
-      <StackC.Screen 
+    <Stack31.Navigator>
+      <Stack31.Screen 
         name="screen1stack3" 
         component={screen1stack3} 
         options={{ 
@@ -146,7 +146,7 @@ function stack3() {
          }}
       />
 
-      <StackC.Screen 
+      <Stack31.Screen 
         name="screen2stack3" 
         component={screen2stack3} 
         options={{ 
@@ -154,7 +154,7 @@ function stack3() {
           headerShown: false
          }}
         />
-    </StackC.Navigator>
+    </Stack31.Navigator>
   );
 }
 
@@ -167,12 +167,22 @@ function MyTabs() {
       <Tab.Screen 
         name="Home" 
         component={stack1} 
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home" size={24} color={color} />
+          ),
+        }}
       />
 
 
       <Tab.Screen 
         name="Buscador" 
         component={stack2} 
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="search" size={24} color={color} />
+          ),
+        }}
       />
 
       <Tab.Screen 
