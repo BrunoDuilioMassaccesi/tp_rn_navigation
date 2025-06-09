@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, TextInput, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Button, TextInput, Text, View, StyleSheet, TouchableOpacity, Image, Pressable } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -24,7 +24,7 @@ function screen2() {
   return (
     <View style={styles.bodyScreen12}>
       <Text style={styles.text}>Esta es la segunda screen</Text>
-      <Button title="volver a la primer screen" onPress={() => navigation.navigate('screen1')} />
+      <Button title="volver a la primer screen" onPress={() => navigation.navigate('screen1')}/>
     </View>
   );
 }
@@ -35,12 +35,11 @@ function screen1stack2() {
   const navigation = useNavigation();
   return (
     <View style={styles.searchScreen}>
-      <Text style={styles.text}>Screen home del segundo stack</Text>
-      <Button title="screen 1 del segundo stack" onPress={() => navigation.navigate('screen2stack2', { itemId: 55 })} />
-      <Text style={styles.text}>Toca el icono</Text>
-      <TouchableOpacity onPress={() => alert('solta la compu')}>
-        <Ionicons name="search" size={75} color="white" />
-      </TouchableOpacity>
+      <Text style={styles.text}>Luego de una investigacion profuna sobre las matematicas, responde la siguiente bien para pasar al proximo screen:</Text>
+      <Text style={styles.pregunta}>¿ 1,01 + 2,99 ?</Text>
+      <Button title="4" onPress={() => alert('NOOOOO BURROOOO')} />
+      <Button title="3" onPress={() => navigation.navigate('screen2stack2', { itemId: 55 })} />
+
     </View>
   );
 }
@@ -50,9 +49,11 @@ function screen2stack2({ route }) {
   const navigation = useNavigation();
   return (
     <View style={styles.searchScreen}>
-      <Text style={styles.text}>screen 1 del segundo stack</Text>
-      <Button title="volver al screen home del segundo stack" onPress={() => navigation.navigate('screen1stack2')} />
-      <Text style={styles.text}>parametro recibido desde home del stack 2 {itemId}</Text>
+      <Text style={styles.text}>Te presumo como se recibir parametros: {itemId}</Text>
+      <Text style={styles.text}>ya ta, se me acabaron las ideas, volve a casa !!</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('screen1stack2')}>
+        <Ionicons name="home" size={75} color="white" />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -61,41 +62,34 @@ const Stack31 = createNativeStackNavigator();
 // screen home del tecer stack
 function screen1stack3() {
   const navigation = useNavigation();
+  const imgLocal2 = require('./assets/logo.png');
   return (
-    <View style={styles.perfilScreen}>
-      <Text style={styles.text}>stack del PERFIL</Text>
-      <Button title="ir al form del perfil" onPress={() => navigation.navigate('screen2stack3')} />
+    <View style={styles.container}>
+      <Image source={imgLocal2} style={styles.logo} />
+      <TextInput style={styles.texto} placeholder='Company' />
+      <TextInput style={styles.contrsaena} placeholder='password' />
+
+      <Pressable style={styles.boton}>
+            <Text style={styles.log}>Iniciar Sesion</Text>
+      </Pressable>
+      <Pressable style={styles.boton}>
+            <Text style={styles.olvidar}>¿Olvidaste tu Contraseña?</Text>
+      </Pressable>
+
     </View>
+
+
+  
   );
 }
 
 function screen2stack3() {
   const navigation = useNavigation();
+  const imgLocal2 = require('./assets/logo.png');
   return (
-    <View style={styles.perfilScreen}>
-      <Text style={styles.text}>PERFIL</Text>
-      
-      <Text style={styles.label}>nombre:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="ingresa tu nombre"
-      />
-      <Text style={styles.label}>gmail</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="ingresa tu gmail"
-        keyboardType="email-address"
-      />
-
-      <Text style={styles.label}>contraseña</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="ingresa tu contraseña"
-        secureTextEntry
-      />
-
-      <Button title="volver a screen1stack3" onPress={() => navigation.navigate('screen1stack3')} />
-    </View>
+    <>
+    
+    </>
   );
 }
 
@@ -128,7 +122,7 @@ function stack3() {
         component={screen1stack3} 
         options={{ 
 
-          title: 'informacion del usuario',
+          title: '¡ 🔔 Advertencia Al Usuario !',
           
           headerStyle: { backgroundColor: 'lightblue' },
           
@@ -138,7 +132,7 @@ function stack3() {
           
           headerRight: () => (
             <Button
-              onPress={() => alert('Solta la comppuuuuuu')}
+              onPress={() => alert('USUARIO BANEADO !')}
               title="Info"
               color="purple"
             />
@@ -217,6 +211,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
+    textAlign: 'center',
   },
   description: {
     color: 'white',
@@ -259,4 +254,64 @@ const styles = StyleSheet.create({
     width: '90%',
     color: 'white',
   },
+  logo:
+  {
+    width:200,
+    height:160,
+    borderRadius:10,
+  },
+  texto: {
+    backgroundColor: '#fff',
+    marginTop: 80,
+    padding: 10,
+    paddingRight: 107,
+    paddingLeft: 107,
+    borderRadius: 7,
+    borderWidth: 2.5,        
+    borderColor: '#1359BF',   
+  },  
+  gmail:
+  {
+    backgroundColor: '#fff',
+    padding:10,
+    paddingRight:80,
+    paddingLeft:80,
+    borderRadius:7,
+    marginTop:30,
+    borderWidth: 2.5,        
+    borderColor: '#1359BF',
+  },
+  contrsaena:
+  {
+    backgroundColor: '#fff',
+    padding:10,
+    paddingRight:107,
+    paddingLeft:107,
+    borderRadius:7,
+    marginTop:30,
+    textAlign:'center',
+    borderWidth: 2.5,        
+    borderColor: '#1359BF',
+  },
+  log:
+  {
+    backgroundColor: '#29426B',
+    padding:10, 
+    marginTop:50,
+    paddingLeft:60,
+    paddingRight:60,
+    borderRadius:5,
+    color: '#fff',
+  },
+  olvidar:
+  {
+    color:'#3C49D2',
+    marginTop:30,
+  },
+  pregunta:
+  {
+    color: 'black',
+    fontSize: 25,
+    marginTop: 10, 
+  }
 });
